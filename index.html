@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NIELIT Certificate Verification</title>
+  <style>
+    /* RESET + FLEXBOX */
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+    }
+
+    header {
+      background: #003366;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    main {
+      flex: 1; /* footer ko niche push karega */
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      width: 90%;
+    }
+
+    h2 {
+      text-align: center;
+      color: #003366;
+    }
+
+    form {
+      margin: 20px 0;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    input {
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #999;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 8px 15px;
+      background: #003366;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0055aa;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+
+    th {
+      background: #e6eef7;
+      color: #003366;
+      width: 30%;
+    }
+
+    .notfound {
+      text-align: center;
+      color: red;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    footer {
+      background: #003366;
+      color: #fff;
+      text-align: center;
+      padding: 12px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    NIELIT Candidate Certificate Verification
+  </header>
+
+  <main>
+    <h2>Verify Certificate</h2>
+    <form id="verifyForm">
+      <input type="text" id="regNo" placeholder="Enter Registration No." required>
+      <input type="text" id="certNo" placeholder="Enter Certificate No." required>
+      <button type="submit">Verify</button>
+    </form>
+
+    <div id="result"></div>
+  </main>
+
+  <footer>
+    © National Institute of Electronics & Information Technology (NIELIT)
+  </footer>
+
+  <script>
+    // Demo Database
+    const records = [
+      {
+        regNo: "1501256",
+        certNo: "221367",
+        name: "KHURSHEEDA BANO",
+        father: "MOHD KABIR KHAN",
+        mother: "SAMISHTA BANO",
+        course: "O Level",
+        subject: "INFORMATION TECHNOLOGY TOOLS AND NETWORK BASICS <br> WEB DESIGNING & PUBLISHING <br> PROGRAMMING AND PROBLEM SOLVING THROUGH PYTHON <br> INTERNET OF THINGS AND ITS APPLICATION",
+        result: "PASS (72.86%)",
+        grade: "B",
+        year: "2024-2025"
+      },
+      {
+        regNo: "1502001",
+        certNo: "301122",
+        name: "RAVINDRA KUMAR",
+        father: "BHAGAWAT SHARAN",
+        mother: "MAYA DEVI",
+        course: "O Level",
+        subject: "INFORMATION TECHNOLOGY TOOLS AND NETWORK BASICS <br> WEB DESIGNING & PUBLISHING <br> PROGRAMMING AND PROBLEM SOLVING THROUGH PYTHON <br> INTERNET OF THINGS AND ITS APPLICATION",
+        result: "PASS (73.34%)",
+        grade: "B",
+        year: "2024-2025"
+      },
+      {
+        regNo: "1502345",
+        certNo: "301376",
+        name: "PRIYANSHU SHARMA",
+        father: "MAHESH KUMAR SHARMA",
+        mother: "GAYATRI DEEPA SHARMA",
+        course: "O Level",
+        subject: "INFORMATION TECHNOLOGY TOOLS AND NETWORK BASICS <br> WEB DESIGNING & PUBLISHING <br> PROGRAMMING AND PROBLEM SOLVING THROUGH PYTHON <br> INTERNET OF THINGS AND ITS APPLICATION",
+        result: "PASS (94.46%)",
+        grade: "A",
+        year: "2023-2024"
+      }
+    ];
+
+    const form = document.getElementById("verifyForm");
+    const resultDiv = document.getElementById("result");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const reg = document.getElementById("regNo").value.trim();
+      const cert = document.getElementById("certNo").value.trim();
+      const record = records.find(r => r.regNo === reg && r.certNo === cert);
+
+      if (record) {
+        resultDiv.innerHTML = `
+          <table>
+            <tr><th>Registration No.</th><td>${record.regNo}</td></tr>
+            <tr><th>Certificate No.</th><td>${record.certNo}</td></tr>
+            <tr><th>Candidate Name</th><td>${record.name}</td></tr>
+            <tr><th>Father's Name</th><td>${record.father}</td></tr>
+            <tr><th>Mother's Name</th><td>${record.mother}</td></tr>
+            <tr><th>Course</th><td>${record.course}</td></tr>
+            <tr><th>Subject</th><td>${record.subject}</td></tr>
+            <tr><th>Result</th><td>${record.result}</td></tr>
+            <tr><th>Grade</th><td>${record.grade}</td></tr>
+            <tr><th>Exam Year</th><td>${record.year}</td></tr>
+          </table>
+        `;
+      } else {
+        resultDiv.innerHTML = `<div class="notfound">❌ Record Not Found</div>`;
+      }
+    });
+  </script>
+</body>
+</html>
