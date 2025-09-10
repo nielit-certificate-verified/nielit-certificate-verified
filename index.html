@@ -124,7 +124,7 @@
   <script>
     // Demo Database
     const records = [
- {
+      {
         regNo: "1501356",
         certNo: "221389",
         name: "GAURAV SHUKLA",
@@ -181,9 +181,13 @@
       e.preventDefault();
       const reg = document.getElementById("regNo").value.trim();
       const cert = document.getElementById("certNo").value.trim();
+
+      console.log("User entered:", { reg, cert }); // Debug log
+
       const record = records.find(r => r.regNo === reg && r.certNo === cert);
 
       if (record) {
+        console.log("Matched record:", record); // Debug log
         resultDiv.innerHTML = `
           <table>
             <tr><th>Registration No.</th><td>${record.regNo}</td></tr>
@@ -199,10 +203,10 @@
           </table>
         `;
       } else {
+        console.warn("No matching record found for:", { reg, cert }); // Debug log
         resultDiv.innerHTML = `<div class="notfound">❌ Record Not Found</div>`;
       }
     });
   </script>
 </body>
 </html>
-
